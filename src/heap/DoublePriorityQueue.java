@@ -2,20 +2,8 @@ package heap;
 
 import java.util.*;
 
-public class DoublePriorityQueue {
-    public static void main(String[] args) {
-        String[] operations = {"I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1" };
-        SolutionDoublePriorityQueue sdpq = new SolutionDoublePriorityQueue();
-        int[] result = sdpq.solution(operations);
 
-        for (int i : result) {
-            System.out.print(i+" ");
-        }
-
-    }
-}
-
-class SolutionDoublePriorityQueue {
+class Solution {
     public int[] solution(String[] operations) {
         int[] answer = {};
         PriorityQueue<Integer> maxQueue = new PriorityQueue<>(Collections.reverseOrder());
@@ -37,19 +25,36 @@ class SolutionDoublePriorityQueue {
                 if (map.size() == 0) {
                     continue;
                 }
-
                 if (value == 1) {
                     //최대값 삭제
                     int max = maxQueue.poll();
-                    int count = map.getOrDefault(max, 0);
-                    if(count==0) continue;
+                    if (map.containsKey(max)) {
+                        map.put(max, map.get(max) - 1);
+                        if (map.get(max) == 0) {
+                            map.remove(max);
+                        }
+                    }
 
                 } else {
                     //최소값 삭제
+                    int min = minQueue.poll();
+                    if (map.containsKey(min)) {
+                        map.put(min, map.get(min) - 1);
+                        if (map.get(min) == 0) {
+                            map.remove(min);
+                        }
+                    }
 
                 }
             }
         }
+
+        if (map.size() == 0) {
+            answer = new int[]{0, 0};
+        } else {
+            answer = new int[]{maxQueue.peek(), minQueue.peek()};
+        }
+
         return answer;
     }
 
