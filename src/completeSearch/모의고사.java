@@ -1,7 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 class Solution {
     public int[] solution(int[] answers) {
@@ -12,7 +10,6 @@ class Solution {
                 {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
         };
 
-        Map<Integer, Integer> scoreMap = new HashMap<>();
         int[] scoreArray = new int[]{0, 0, 0};
         for (int i = 0; i < supoja.length; i++) {
             for (int j = 0; j < answers.length; j++) {
